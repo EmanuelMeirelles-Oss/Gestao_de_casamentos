@@ -1,0 +1,13 @@
+{
+  "proximo_id": 2,
+  "registros": [
+    {
+      "id": 1,
+      "nome": "emanuel meirelles",
+      "tipo_servico": "Bolo e Doces",
+      "email": "nidogoal@gmail.com",
+      "telefone": "48991756667",
+      "criado_em": "2026-05-03T16:01:49.936Z"
+    }
+  ]
+}

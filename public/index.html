@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestão de Fornecedores — Casamentos</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <h1>Gestão de Casamentos</h1>
+      <span class="header-sub">Gestão de Fornecedores</span>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Formulário de cadastro / edição -->
+    <section class="card">
+      <h2 id="titulo-form">Cadastrar Fornecedor</h2>
+
+      <div id="mensagem" class="mensagem" role="alert"></div>
+
+      <form id="form-fornecedor" novalidate>
+        <div class="form-grid">
+
+          <div class="campo">
+            <label for="nome">Nome <span class="obrigatorio">*</span></label>
+            <input type="text" id="nome" placeholder="Ex.: Buffet Bella Vita" maxlength="100" required />
+          </div>
+
+          <div class="campo">
+            <label for="tipo_servico">Tipo de Serviço <span class="obrigatorio">*</span></label>
+            <input type="text" id="tipo_servico" list="tipos-servico"
+                   placeholder="Selecione ou digite" maxlength="60" required />
+            <datalist id="tipos-servico">
+              <option value="Buffet"></option>
+              <option value="Fotografia / Filmagem"></option>
+              <option value="Decoração"></option>
+              <option value="Música / DJ"></option>
+              <option value="Cerimonial"></option>
+              <option value="Flores e Arranjos"></option>
+              <option value="Bolo e Doces"></option>
+              <option value="Vestido / Trajes"></option>
+              <option value="Transporte"></option>
+              <option value="Espaço / Local"></option>
+              <option value="Outro"></option>
+            </datalist>
+          </div>
+
+          <div class="campo">
+            <label for="email">E-mail <span class="obrigatorio">*</span></label>
+            <input type="email" id="email" placeholder="contato@fornecedor.com" maxlength="100" required />
+          </div>
+
+          <div class="campo">
+            <label for="telefone">Telefone <span class="obrigatorio">*</span></label>
+            <input type="text" id="telefone" placeholder="(11) 99999-9999" maxlength="20" required />
+          </div>
+
+        </div>
+
+        <div class="form-acoes">
+          <button type="submit" id="btn-salvar" class="btn btn-primario">Cadastrar</button>
+          <button type="button" id="btn-cancelar" class="btn btn-secundario" style="display:none">Cancelar</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Lista de fornecedores -->
+    <section class="card">
+      <div class="lista-header">
+        <h2>Fornecedores Cadastrados</h2>
+        <span id="total-registros" class="badge">0 fornecedor(es)</span>
+      </div>
+
+      <div class="tabela-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Tipo de Serviço</th>
+              <th>E-mail</th>
+              <th>Telefone</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-fornecedores">
+            <tr>
+              <td colspan="5" class="vazio">Carregando...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

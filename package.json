@@ -1,0 +1,12 @@
+{
+  "name": "gestao-fornecedores-casamento",
+  "version": "1.0.0",
+  "description": "Sistema de Gestão de Fornecedores para Casamentos",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
