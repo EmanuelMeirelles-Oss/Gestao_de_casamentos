@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestão de Eventos — Casamentos</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <h1>Gestão de Casamentos</h1>
+      <span class="header-sub">Painel de Controle</span>
+    </div>
+    <nav class="main-nav">
+      <a href="index.html">Fornecedores</a>
+      <a href="noivos.html">Noivos</a>
+      <a href="eventos.html" class="active">Eventos</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2 id="titulo-form">Criar Evento</h2>
+      <div id="mensagem" class="mensagem" role="alert"></div>
+
+      <form id="form-evento" novalidate>
+        <div class="form-grid">
+          <div class="campo">
+            <label for="noivos_id">Casal de Noivos <span class="obrigatorio">*</span></label>
+            <select id="noivos_id" required style="padding: 9px 12px; border: 1.5px solid #d4c8dc; border-radius: 6px; font-size: .95rem; background: #fdfcfe; width: 100%;">
+              <option value="">Selecione um casal...</option>
+            </select>
+          </div>
+
+          <div class="campo">
+            <label for="data_evento">Data do Evento <span class="obrigatorio">*</span></label>
+            <input type="date" id="data_evento" required style="padding: 9px 12px; border: 1.5px solid #d4c8dc; border-radius: 6px; font-size: .95rem; background: #fdfcfe; width: 100%;" />
+          </div>
+
+          <div class="campo">
+            <label for="local">Local <span class="obrigatorio">*</span></label>
+            <input type="text" id="local" placeholder="Ex.: Chácara Pôr do Sol" maxlength="255" required />
+          </div>
+
+          <div class="campo">
+            <label for="orcamento">Orçamento Previsto (R$)</label>
+            <input type="number" id="orcamento" step="0.01" placeholder="Ex.: 50000.00" style="padding: 9px 12px; border: 1.5px solid #d4c8dc; border-radius: 6px; font-size: .95rem; background: #fdfcfe; width: 100%;" />
+          </div>
+          
+          <div class="campo" style="grid-column: span 2;">
+            <label for="descricao">Descrição / Observações</label>
+            <input type="text" id="descricao" placeholder="Detalhes adicionais..." />
+          </div>
+        </div>
+
+        <div class="form-acoes">
+          <button type="submit" id="btn-salvar" class="btn btn-primario">Salvar Evento</button>
+          <button type="button" id="btn-cancelar" class="btn btn-secundario" style="display:none">Cancelar</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="lista-header">
+        <h2>Eventos Programados</h2>
+        <span id="total-registros" class="badge">0 evento(s)</span>
+      </div>
+
+      <div class="tabela-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Casal</th>
+              <th>Data</th>
+              <th>Local</th>
+              <th>Orçamento</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-eventos">
+            <tr>
+              <td colspan="5" class="vazio">Carregando...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="eventos.js"></script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 const express = require('express');
 const path    = require('path');
-const db      = require('./database');
+const db       = require('./database');
+const supabase = require('./db_supabase');
 
 const app   = express();
 const PORTA = 3000;
@@ -83,6 +84,78 @@ app.delete('/api/fornecedores/:id', (req, res) => {
     return res.status(404).json({ erro: 'Fornecedor não encontrado.' });
   }
   res.json({ mensagem: 'Fornecedor excluído com sucesso.' });
+});
+
+// ====== ROTAS DE NOIVOS ======
+app.get('/api/noivos', async (req, res) => {
+  const { data, error } = await supabase.from('noivos').select('*').order('nome_noiva', { ascending: true });
+  if (error) return res.status(500).json({ erro: error.message });
+  res.json(data || []);
+});
+
+app.get('/api/noivos/:id', async (req, res) => {
+  const { data, error } = await supabase.from('noivos').select('*').eq('id', req.params.id).single();
+  if (error || !data) return res.status(404).json({ erro: 'Casal não encontrado.' });
+  res.json(data);
+});
+
+app.post('/api/noivos', async (req, res) => {
+  const { nome_noivo, nome_noiva, email, telefone } = req.body;
+  if (!nome_noivo || !nome_noiva || !email || !telefone) {
+    return res.status(400).json({ erro: 'Todos os campos são obrigatórios.' });
+  }
+  const { data, error } = await supabase.from('noivos').insert([{ nome_noivo, nome_noiva, email, telefone }]).select().single();
+  if (error) return res.status(500).json({ erro: error.message });
+  res.status(201).json(data);
+});
+
+app.put('/api/noivos/:id', async (req, res) => {
+  const { nome_noivo, nome_noiva, email, telefone } = req.body;
+  const { data, error } = await supabase.from('noivos').update({ nome_noivo, nome_noiva, email, telefone }).eq('id', req.params.id).select().single();
+  if (error) return res.status(500).json({ erro: error.message });
+  res.json(data);
+});
+
+app.delete('/api/noivos/:id', async (req, res) => {
+  const { error } = await supabase.from('noivos').delete().eq('id', req.params.id);
+  if (error) return res.status(500).json({ erro: error.message });
+  res.json({ mensagem: 'Casal excluído com sucesso.' });
+});
+
+// ====== ROTAS DE EVENTOS ======
+app.get('/api/eventos', async (req, res) => {
+  const { data, error } = await supabase.from('eventos').select('*, noivos:noivos_id (nome_noiva, nome_noivo)').order('data_evento', { ascending: true });
+  if (error) return res.status(500).json({ erro: error.message });
+  res.json(data || []);
+});
+
+app.get('/api/eventos/:id', async (req, res) => {
+  const { data, error } = await supabase.from('eventos').select('*, noivos:noivos_id (nome_noiva, nome_noivo)').eq('id', req.params.id).single();
+  if (error || !data) return res.status(404).json({ erro: 'Evento não encontrado.' });
+  res.json(data);
+});
+
+app.post('/api/eventos', async (req, res) => {
+  const { noivos_id, data_evento, local, descricao, orcamento } = req.body;
+  if (!noivos_id || !data_evento || !local) {
+    return res.status(400).json({ erro: 'Noivos, Data do Evento e Local são obrigatórios.' });
+  }
+  const { data, error } = await supabase.from('eventos').insert([{ noivos_id, data_evento, local, descricao, orcamento }]).select().single();
+  if (error) return res.status(500).json({ erro: error.message });
+  res.status(201).json(data);
+});
+
+app.put('/api/eventos/:id', async (req, res) => {
+  const { noivos_id, data_evento, local, descricao, orcamento } = req.body;
+  const { data, error } = await supabase.from('eventos').update({ noivos_id, data_evento, local, descricao, orcamento }).eq('id', req.params.id).select().single();
+  if (error) return res.status(500).json({ erro: error.message });
+  res.json(data);
+});
+
+app.delete('/api/eventos/:id', async (req, res) => {
+  const { error } = await supabase.from('eventos').delete().eq('id', req.params.id);
+  if (error) return res.status(500).json({ erro: error.message });
+  res.json({ mensagem: 'Evento excluído com sucesso.' });
 });
 
 app.listen(PORTA, () => {

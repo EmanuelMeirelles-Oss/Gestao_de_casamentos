@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gestão de Fornecedores — Casamentos</title>
+  <title>Gestão de Noivos — Casamentos</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -14,57 +14,38 @@
       <span class="header-sub">Painel de Controle</span>
     </div>
     <nav class="main-nav">
-      <a href="index.html" class="active">Fornecedores</a>
-      <a href="noivos.html">Noivos</a>
+      <a href="index.html">Fornecedores</a>
+      <a href="noivos.html" class="active">Noivos</a>
       <a href="eventos.html">Eventos</a>
     </nav>
   </header>
 
   <main>
-
-    <!-- Formulário de cadastro / edição -->
     <section class="card">
-      <h2 id="titulo-form">Cadastrar Fornecedor</h2>
-
+      <h2 id="titulo-form">Cadastrar Noivos</h2>
       <div id="mensagem" class="mensagem" role="alert"></div>
 
-      <form id="form-fornecedor" novalidate>
+      <form id="form-noivos" novalidate>
         <div class="form-grid">
-
           <div class="campo">
-            <label for="nome">Nome <span class="obrigatorio">*</span></label>
-            <input type="text" id="nome" placeholder="Ex.: Buffet Bella Vita" maxlength="100" required />
+            <label for="nome_noivo">Nome do Noivo <span class="obrigatorio">*</span></label>
+            <input type="text" id="nome_noivo" placeholder="Ex.: João Silva" maxlength="100" required />
           </div>
 
           <div class="campo">
-            <label for="tipo_servico">Tipo de Serviço <span class="obrigatorio">*</span></label>
-            <input type="text" id="tipo_servico" list="tipos-servico"
-                   placeholder="Selecione ou digite" maxlength="60" required />
-            <datalist id="tipos-servico">
-              <option value="Buffet"></option>
-              <option value="Fotografia / Filmagem"></option>
-              <option value="Decoração"></option>
-              <option value="Música / DJ"></option>
-              <option value="Cerimonial"></option>
-              <option value="Flores e Arranjos"></option>
-              <option value="Bolo e Doces"></option>
-              <option value="Vestido / Trajes"></option>
-              <option value="Transporte"></option>
-              <option value="Espaço / Local"></option>
-              <option value="Outro"></option>
-            </datalist>
+            <label for="nome_noiva">Nome da Noiva <span class="obrigatorio">*</span></label>
+            <input type="text" id="nome_noiva" placeholder="Ex.: Maria Souza" maxlength="100" required />
           </div>
 
           <div class="campo">
             <label for="email">E-mail <span class="obrigatorio">*</span></label>
-            <input type="email" id="email" placeholder="contato@fornecedor.com" maxlength="100" required />
+            <input type="email" id="email" placeholder="contato@casal.com" maxlength="100" required />
           </div>
 
           <div class="campo">
             <label for="telefone">Telefone <span class="obrigatorio">*</span></label>
             <input type="text" id="telefone" placeholder="(11) 99999-9999" maxlength="20" required />
           </div>
-
         </div>
 
         <div class="form-acoes">
@@ -74,25 +55,24 @@
       </form>
     </section>
 
-    <!-- Lista de fornecedores -->
     <section class="card">
       <div class="lista-header">
-        <h2>Fornecedores Cadastrados</h2>
-        <span id="total-registros" class="badge">0 fornecedor(es)</span>
+        <h2>Casais Cadastrados</h2>
+        <span id="total-registros" class="badge">0 casal(is)</span>
       </div>
 
       <div class="tabela-wrapper">
         <table>
           <thead>
             <tr>
-              <th>Nome</th>
-              <th>Tipo de Serviço</th>
+              <th>Noivo</th>
+              <th>Noiva</th>
               <th>E-mail</th>
               <th>Telefone</th>
               <th>Ações</th>
             </tr>
           </thead>
-          <tbody id="tbody-fornecedores">
+          <tbody id="tbody-noivos">
             <tr>
               <td colspan="5" class="vazio">Carregando...</td>
             </tr>
@@ -100,9 +80,8 @@
         </table>
       </div>
     </section>
-
   </main>
 
-  <script src="app.js"></script>
+  <script src="noivos.js"></script>
 </body>
 </html>

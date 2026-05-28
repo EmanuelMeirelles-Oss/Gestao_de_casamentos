@@ -31,6 +31,33 @@ header {
   opacity: .8;
 }
 
+/* ── Navegação ── */
+.main-nav {
+  margin-top: 16px;
+  display: flex;
+  gap: 16px;
+}
+
+.main-nav a {
+  color: #ede8f0;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.main-nav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.main-nav a.active {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
 /* ── Main ── */
 main {
   max-width: 960px;
