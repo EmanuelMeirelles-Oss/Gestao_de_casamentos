@@ -29,14 +29,14 @@
         <div class="form-grid">
           <div class="campo">
             <label for="noivos_id">Casal de Noivos <span class="obrigatorio">*</span></label>
-            <select id="noivos_id" required style="padding: 9px 12px; border: 1.5px solid #d4c8dc; border-radius: 6px; font-size: .95rem; background: #fdfcfe; width: 100%;">
+            <select id="noivos_id" required>
               <option value="">Selecione um casal...</option>
             </select>
           </div>
 
           <div class="campo">
             <label for="data_evento">Data do Evento <span class="obrigatorio">*</span></label>
-            <input type="date" id="data_evento" required style="padding: 9px 12px; border: 1.5px solid #d4c8dc; border-radius: 6px; font-size: .95rem; background: #fdfcfe; width: 100%;" />
+            <input type="date" id="data_evento" required />
           </div>
 
           <div class="campo">
@@ -46,10 +46,10 @@
 
           <div class="campo">
             <label for="orcamento">Orçamento Previsto (R$)</label>
-            <input type="number" id="orcamento" step="0.01" placeholder="Ex.: 50000.00" style="padding: 9px 12px; border: 1.5px solid #d4c8dc; border-radius: 6px; font-size: .95rem; background: #fdfcfe; width: 100%;" />
+            <input type="number" id="orcamento" step="0.01" placeholder="Ex.: 50000.00" />
           </div>
-          
-          <div class="campo" style="grid-column: span 2;">
+
+          <div class="campo campo-full">
             <label for="descricao">Descrição / Observações</label>
             <input type="text" id="descricao" placeholder="Detalhes adicionais..." />
           </div>
