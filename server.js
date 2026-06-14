@@ -201,7 +201,7 @@ app.put('/api/eventos/:id', async (req, res) => {
 
     const { noivos_id, data_evento, local, descricao, orcamento } = req.body;
     const { data, error } = await supabase.from('eventos').update({ noivos_id, data_evento, local, descricao, orcamento }).eq('id', req.params.id).select().single();
-    if (error) return res.status(500).json({ erro: error.message });
+    if (error || !data) return res.status(404).json({ erro: 'Evento não encontrado.' });
     res.json(data);
 });
 
