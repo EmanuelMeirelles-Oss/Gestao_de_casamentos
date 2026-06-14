@@ -48,6 +48,24 @@ function validarNoivos(dados) {
     return null;
 }
 
+function validarEvento(dados) {
+    const { noivos_id, data_evento, local, orcamento } = dados;
+
+    if (!noivos_id || !data_evento || !local) {
+        return 'Casal, Data do Evento e Local são obrigatórios.';
+    }
+    if (isNaN(new Date(data_evento).getTime())) {
+        return 'Data do evento inválida.';
+    }
+    if (orcamento !== undefined && orcamento !== null && orcamento !== '') {
+        const valor = Number(orcamento);
+        if (isNaN(valor) || valor < 0) {
+            return 'Orçamento deve ser um número maior ou igual a zero.';
+        }
+    }
+    return null;
+}
+
 // ====== ROTAS DE FORNECEDORES (usando Supabase) ======
 
 // Listar todos os fornecedores
@@ -168,16 +186,19 @@ app.get('/api/eventos/:id', async (req, res) => {
 });
 
 app.post('/api/eventos', async (req, res) => {
+    const erro = validarEvento(req.body);
+    if (erro) return res.status(400).json({ erro });
+
     const { noivos_id, data_evento, local, descricao, orcamento } = req.body;
-    if (!noivos_id || !data_evento || !local) {
-          return res.status(400).json({ erro: 'noivos_id, data_evento e local são obrigatórios.' });
-    }
     const { data, error } = await supabase.from('eventos').insert([{ noivos_id, data_evento, local, descricao, orcamento }]).select().single();
     if (error) return res.status(500).json({ erro: error.message });
     res.status(201).json(data);
 });
 
 app.put('/api/eventos/:id', async (req, res) => {
+    const erro = validarEvento(req.body);
+    if (erro) return res.status(400).json({ erro });
+
     const { noivos_id, data_evento, local, descricao, orcamento } = req.body;
     const { data, error } = await supabase.from('eventos').update({ noivos_id, data_evento, local, descricao, orcamento }).eq('id', req.params.id).select().single();
     if (error) return res.status(500).json({ erro: error.message });
