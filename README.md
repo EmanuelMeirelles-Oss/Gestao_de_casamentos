@@ -68,7 +68,7 @@ A tabela `eventos` possui uma chave estrangeira `noivos_id` que referencia `noiv
    SUPABASE_KEY=SUA_CHAVE_PUBLICA
    ```
 
-4. Execute as instruções do arquivo `schema.sql` no editor SQL do Supabase para criar as tabelas `noivos` e `eventos` (a tabela `fornecedores` segue a mesma estrutura descrita acima).
+4. Execute as instruções do arquivo `schema.sql` no editor SQL do Supabase para criar as tabelas `fornecedores`, `noivos` e `eventos`.
 
 5. Inicie o servidor:
    ```bash
