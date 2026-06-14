@@ -179,5 +179,8 @@ corpoTabela.addEventListener('click', (evento) => {
   }
 });
 
+// Aplica máscara de telefone
+aplicarMascaraTelefone(document.getElementById('telefone'));
+
 // Carrega os fornecedores assim que a página abre
 carregarFornecedores();

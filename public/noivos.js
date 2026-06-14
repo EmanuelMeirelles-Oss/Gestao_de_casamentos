@@ -142,4 +142,7 @@ corpoTabela.addEventListener('click', (evento) => {
   if (btnExcluir) removerNoivos(parseInt(btnExcluir.dataset.id, 10), btnExcluir.dataset.nome);
 });
 
+// Aplica máscara de telefone
+aplicarMascaraTelefone(document.getElementById('telefone'));
+
 carregarNoivos();
