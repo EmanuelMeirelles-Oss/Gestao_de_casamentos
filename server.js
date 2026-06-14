@@ -144,7 +144,7 @@ app.put('/api/noivos/:id', async (req, res) => {
         email: email.trim(),
         telefone: telefone.trim(),
     }).eq('id', req.params.id).select().single();
-    if (error) return res.status(500).json({ erro: error.message });
+    if (error || !data) return res.status(404).json({ erro: 'Casal não encontrado.' });
     res.json(data);
 });
 
