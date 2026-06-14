@@ -28,6 +28,26 @@ function validarFornecedor(dados) {
     return null;
 }
 
+function validarNoivos(dados) {
+    const { nome_noivo, nome_noiva, email, telefone } = dados;
+
+    if (!nome_noivo || !nome_noiva || !email || !telefone) {
+        return 'Todos os campos são obrigatórios.';
+    }
+    if (nome_noivo.trim().length < 2 || nome_noiva.trim().length < 2) {
+        return 'Os nomes devem ter pelo menos 2 caracteres.';
+    }
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!regexEmail.test(email.trim())) {
+        return 'E-mail inválido.';
+    }
+    const regexTelefone = /^[\d\s()\-+]{8,20}$/;
+    if (!regexTelefone.test(telefone.trim())) {
+        return 'Telefone inválido. Use apenas números, parênteses, traços e espaços (8 a 20 caracteres).';
+    }
+    return null;
+}
+
 // ====== ROTAS DE FORNECEDORES (usando Supabase) ======
 
 // Listar todos os fornecedores
@@ -99,18 +119,31 @@ app.get('/api/noivos/:id', async (req, res) => {
 });
 
 app.post('/api/noivos', async (req, res) => {
+    const erro = validarNoivos(req.body);
+    if (erro) return res.status(400).json({ erro });
+
     const { nome_noivo, nome_noiva, email, telefone } = req.body;
-    if (!nome_noivo || !nome_noiva || !email || !telefone) {
-          return res.status(400).json({ erro: 'Todos os campos são obrigatórios.' });
-    }
-    const { data, error } = await supabase.from('noivos').insert([{ nome_noivo, nome_noiva, email, telefone }]).select().single();
+    const { data, error } = await supabase.from('noivos').insert([{
+        nome_noivo: nome_noivo.trim(),
+        nome_noiva: nome_noiva.trim(),
+        email: email.trim(),
+        telefone: telefone.trim(),
+    }]).select().single();
     if (error) return res.status(500).json({ erro: error.message });
     res.status(201).json(data);
 });
 
 app.put('/api/noivos/:id', async (req, res) => {
+    const erro = validarNoivos(req.body);
+    if (erro) return res.status(400).json({ erro });
+
     const { nome_noivo, nome_noiva, email, telefone } = req.body;
-    const { data, error } = await supabase.from('noivos').update({ nome_noivo, nome_noiva, email, telefone }).eq('id', req.params.id).select().single();
+    const { data, error } = await supabase.from('noivos').update({
+        nome_noivo: nome_noivo.trim(),
+        nome_noiva: nome_noiva.trim(),
+        email: email.trim(),
+        telefone: telefone.trim(),
+    }).eq('id', req.params.id).select().single();
     if (error) return res.status(500).json({ erro: error.message });
     res.json(data);
 });
