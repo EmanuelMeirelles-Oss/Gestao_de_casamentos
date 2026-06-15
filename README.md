@@ -93,3 +93,10 @@ A tabela `eventos` possui uma chave estrangeira `noivos_id` que referencia `noiv
 
 O projeto está publicado em:
 **https://gestao-de-casamentos.vercel.app/**
+
+---
+
+## Vídeo Demonstrativo
+
+Vídeo demonstrando as principais funcionalidades do sistema em funcionamento:
+**https://youtu.be/wD-ycc2xEvE**
